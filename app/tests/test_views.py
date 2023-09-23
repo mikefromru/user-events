@@ -16,7 +16,6 @@ class TestAppView(APITestCase):
         self.user_1 = User.objects.create_user(username='user_1', password='qwerty')
         self.token = Token.objects.get_or_create(user=self.user_1)
 
-
     def test_url(self):
         logger.debug('Starting test url access')
         self.client.credentials(HTTP_AUTHORIZATION='TOKEN ' + str(self.token[0]))
