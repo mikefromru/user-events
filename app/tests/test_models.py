@@ -4,7 +4,7 @@ from ..models import Event
 
 User = get_user_model()
 
-class TestApp(TestCase):
+class TestAppModel(TestCase):
 
     def setUp(self):
         self.user_1 = User.objects.create_user(username='user_1', password='qwerty')
