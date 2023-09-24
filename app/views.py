@@ -28,8 +28,22 @@ class EventAPIView(APIView):
 
 class EventDetailAPIView(APIView):
 
-    def delete(self, request, pk, format=None):
+    def patch(self, request, pk, format=None):
         event = get_object_or_404(Event.objects.all(), pk=pk)
+        if event.participants.filter(id=request.user.id).exists():
+            print('it is exitst')
+            event.participants.remove(request.user.id)
+        else:
+            print('it does not exitst')
+            event.participants.add(request.user.id)
+
+        event.save()
+        serializer = EventSerializer(event)
+        return Response(serializer.data)
+
+    # Delete user event
+    def delete(self, request, pk, format=None):
+        event = get_object_or_404(Event.objects.all(), pk=pk, creator=request.user)
         event.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
