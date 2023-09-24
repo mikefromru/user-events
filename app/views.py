@@ -9,11 +9,17 @@ from rest_framework import status
 
 User = get_user_model()
 
+class EventListAPIView(APIView):
+
+    def get(self, request):
+        queryset = Event.objects.all()
+        serializer = EventSerializer(queryset, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
 class EventAPIView(APIView):
 
     # Get only auth user events
     def get(self, request):
-        # queryset = Event.objects.all()
         queryset = Event.objects.filter(creator=request.user)
         serializer = EventSerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
@@ -31,12 +37,11 @@ class EventDetailAPIView(APIView):
     def patch(self, request, pk, format=None):
         event = get_object_or_404(Event.objects.all(), pk=pk)
         if event.participants.filter(id=request.user.id).exists():
-            print('it is exitst')
+            # Leave participant event
             event.participants.remove(request.user.id)
         else:
-            print('it does not exitst')
+            # Become participat of event
             event.participants.add(request.user.id)
-
         event.save()
         serializer = EventSerializer(event)
         return Response(serializer.data)
