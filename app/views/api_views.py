@@ -1,11 +1,12 @@
 from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .models import Event
-from .serializers import EventSerializer
+from ..models import Event
+from ..serializers import EventSerializer
 from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404
 from rest_framework import status
+
 
 User = get_user_model()
 
@@ -34,6 +35,7 @@ class EventAPIView(APIView):
 
 class EventDetailAPIView(APIView):
 
+    # Stop or take part as a participant in event
     def patch(self, request, pk, format=None):
         event = get_object_or_404(Event.objects.all(), pk=pk)
         if event.participants.filter(id=request.user.id).exists():
@@ -44,7 +46,7 @@ class EventDetailAPIView(APIView):
             event.participants.add(request.user.id)
         event.save()
         serializer = EventSerializer(event)
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
     # Delete user event
     def delete(self, request, pk, format=None):
