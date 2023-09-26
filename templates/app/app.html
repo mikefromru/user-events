@@ -11,9 +11,11 @@
     <title>Document</title>
 </head>
 <body>
+{% if user.is_authorizeted %}
+
 {% verbatim %}
     <div id="app">
-        <div v-if="lst">
+        <div v-if="token">
             {{ lst }}
         </div>
         <div v-else>
@@ -21,6 +23,11 @@
         </div>
     </div>
 {% endverbatim %}
+
+{% else %}
+{% include 'app/login.html' %}
+{% endif %}
+
 <script src="{% static 'js/app/app.js' %}"></script>
 </body>
 </html>
