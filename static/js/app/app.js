@@ -4,6 +4,7 @@ new Vue({
         return {
             msg: 'Hi Django from Vue.js',
             lst: [],
+            token: false,
         }
     },
     mounted() {
@@ -13,7 +14,7 @@ new Vue({
         ))
         .catch(function (error) {
             if (error.response) {
-                // console.log(error.response.data)
+                console.log('error.response.data')
                 if (error.response.status == 401) {
                     console.log('401')
                     // window.location.href = '/login/';
