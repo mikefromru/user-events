@@ -7,6 +7,17 @@ new Vue({
             token: false,
         }
     },
+    methods: {
+        logout() {
+            console.log('logout')
+            axios.defaults.xsrfCookieName = 'csrftoken'
+            axios.defaults.xsrfHeaderName = 'X-CSRFToken'
+            axios.post('/accounts/logout/', {'revoke_token': true})
+            .then(response => (
+                console.log(response.data)
+            ))
+        }
+    },
     mounted() {
         axios.get('api/v1/app/events/')
             .then(response => (

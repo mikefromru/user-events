@@ -15,14 +15,7 @@
 <body>
 {% block content %}
 {% if user.is_authenticated %}
-    <p>is is_authenticated</p>
-        {% verbatim %}
-        <div id="app">
-            <li v-for="x in events">
-                {{ x.title }}
-            </li>
-        </div>
-        {% endverbatim %}
+    {% include 'app/events.html' %}
 {% else %}
     {% include 'app/login.html' %}
 {% endif %}

@@ -1,0 +1,12 @@
+{% extends 'app/app.html' %}
+{% load static %}
+{% block content %}
+{% verbatim %}
+<div id="app">
+    <button type='button' class="btn btn-primary" @click="logout">logout</button>
+    <li v-for="x in events">
+        {{ x.title }}
+    </li>
+</div>
+{% endverbatim %}
+{% endblock %}
