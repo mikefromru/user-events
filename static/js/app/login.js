@@ -27,8 +27,6 @@ new Vue({
                     console.log('error.response.data')
                     if (error.response.status == 401) {
                         console.log('401')
-                        // window.location.href = '/login/';
-
                     }
 
                 }

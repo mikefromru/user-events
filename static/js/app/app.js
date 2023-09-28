@@ -1,13 +1,19 @@
 new Vue({
+    // delimiters: ['[[', ']]'],
     el: '#app',
     data() {
         return {
-            msg: 'hi django from APP vue.js',
             events: [],
+            my_event: {},
             token: false,
         }
     },
     methods: {
+        get_event(ev) {
+            this.my_event = ev
+            console.log(ev)
+            
+        },
         logout() {
             console.log('logout')
             axios.defaults.xsrfCookieName = 'csrftoken'
