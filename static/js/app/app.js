@@ -14,7 +14,8 @@ new Vue({
             axios.defaults.xsrfHeaderName = 'X-CSRFToken'
             axios.post('/accounts/logout/', {'revoke_token': true})
             .then(response => (
-                console.log(response.data)
+                console.log(response.data),
+                window.location.reload()
             ))
         }
     },

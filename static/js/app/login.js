@@ -1,4 +1,5 @@
 console.log('fuck you motherfucker')
+
 new Vue({
     // delimiters: ['[[', ']]'],
     el: '#login-app',
@@ -17,7 +18,9 @@ new Vue({
             axios.post('accounts/login/', body=payload)
             .then(response => (
                 // this.lst = response.data
-                console.log(response.data)
+                console.log(response.data),
+                window.location.reload(),
+                console.log('fucking log')
             ))
             .catch(function (error) {
                 if (error.response) {
