@@ -1,12 +1,43 @@
 {% extends 'app/app.html' %}
 {% load static %}
 {% block content %}
-{% verbatim %}
 <div id="app">
-    <button type='button' class="btn btn-primary" @click="logout">logout</button>
-    <li v-for="x in events">
-        {{ x.title }}
-    </li>
+    <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand" href="#">
+            {{ user.username }}
+        </a>
+        <button type='' class="btn btn-link" @click="logout">logout</button>
+    </nav>
+    {% verbatim %}
+    <div class="container">
+        <div class="row">
+            <div class="col-4">
+                <div>Все события</div>
+                <li v-for="x in events">
+                    <a @click='get_event(x)'>{{ x.title }}</a>
+                </li>
+                <br>
+                <div>Мои события</div>
+                <li v-for="x in events">
+                    {{ x.title }}
+                </li>
+            </div>
+            <div class="col">
+                <div>
+                    <!-- <p>Name of chosen event</p> -->
+                    <h1>{{ my_event.title }}</h1>
+                    <p>{{ my_event.body }}</p>
+                    <p>{{ my_event.created_at }}</p>
+                </div>
+
+                <div>
+                    <h1>Участники</h1>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    {% endverbatim %}
 </div>
-{% endverbatim %}
+
 {% endblock %}
