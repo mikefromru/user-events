@@ -3,15 +3,15 @@ new Vue({
     el: '#app',
     data() {
         return {
-            events: [],
-            my_event: {},
+            all_events: [],
+            detail_event: {},
+            user_events: [],
             flag: false,
         }
     },
     methods: {
         get_event(ev) {
-            this.my_event = ev
-            // console.log(ev)
+            this.detail_event = ev
             this.flag = true
             
         },
@@ -29,7 +29,12 @@ new Vue({
     mounted() {
         axios.get('api/v1/app/events/')
             .then(response => (
-                this.events = response.data
+                this.all_events = response.data
+            ))
+        axios.get('api/v1/app/')
+            .then(response => (
+                this.user_events = response.data
+                // console.log(response.data)
             ))
     }
 })

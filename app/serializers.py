@@ -8,7 +8,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta: 
         model = User
-        fields = ('id', 'username')
+        fields = ('id', 'first_name', 'last_name')
 
 
 class EventSerializer(serializers.ModelSerializer):
