@@ -5,13 +5,14 @@ new Vue({
         return {
             events: [],
             my_event: {},
-            token: false,
+            flag: false,
         }
     },
     methods: {
         get_event(ev) {
             this.my_event = ev
-            console.log(ev)
+            // console.log(ev)
+            this.flag = true
             
         },
         logout() {

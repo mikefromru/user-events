@@ -28,7 +28,7 @@ class EventAPIView(APIView):
     # Create user event and become participant
     def post(self, request, *args, **kwargs):
         serializer = EventSerializer(data=request.data)
-        if serializer.is_valid():
+        if serializer.is_valid(raise_exception=True):
             serializer.save()
             return Response(serializer.data, status=201)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -44,6 +44,8 @@ class EventDetailAPIView(APIView):
         else:
             # Become participat of event
             event.participants.add(request.user.id)
+            # event.participants.add(request.user.username)
+            # event.participants.add(request.user.username)
         event.save()
         serializer = EventSerializer(event)
         return Response(serializer.data, status=status.HTTP_200_OK)
