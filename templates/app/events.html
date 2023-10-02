@@ -6,7 +6,7 @@
     {{ request.user.id|json_script:"user_id" }}
     <nav class="navbar navbar-light bg-light">
         <a class="navbar-brand my-brand" href="#">
-        <!-- <a class="navbar-brand"> -->
+            <img src="{% static 'i/logo.jpg' %}" width="35" height="35" class="d-inline-block align-top" alt="">
             {{ user.username }}
         </a>
         <button type='' class="btn btn-link" @click="logout">logout</button>
@@ -17,13 +17,13 @@
         <div class="row">
             <div class="col-4">
                 <!-- All events -->
-                <div>Все события</div>
+                <h5>Все события</h5>
                 <li v-for="x in all_events">
                     <a href="#" @click='get_event(x)'>{{ x.title }}</a>
                 </li>
                 <br>
                 <!-- current user event -->
-                <div>Мои события</div>
+                <h5>Мои события</h5>
                 <li v-for="x in user_events">
                     <a href="#" @click='get_event(x)'>{{ x.title }}</a>
                 </li>
@@ -31,12 +31,12 @@
             <!-- Name of chosen event -->
             <div v-if="show_detail_even_block" class="col">
                 <div>
-                    <h3>{{ detail_event.title }}</h3>
+                    <h5>{{ detail_event.title }}</h5>
                     <p>{{ detail_event.body }}</p>
                     <p>{{ detail_event.created_at }}</p>
                 </div>
                 <div v-if="flag">
-                    <h3>Участники</h3>
+                    <h5>Участники</h5>
                     <div v-for="(x, index) in detail_event.participants">
                     <a href="#" @click="get_user_info(x)">{{ index + 1}} {{ x.first_name }} {{ x.last_name }}</a>
                     </div>
@@ -46,7 +46,7 @@
             </div>
             <!-- Info about user -->
             <div v-if="show_user_info" class="col" @click="close">
-                <h3>Информация о пользователе</h3>
+                <h5>Информация о пользователе</h5>
                 <p>Логин: {{ user_info.username }}</p>
                 <p>Имя: {{ user_info.first_name }}</p>
                 <p>Фамилия: {{ user_info.last_name }}</p>

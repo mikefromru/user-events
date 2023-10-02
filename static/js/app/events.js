@@ -78,8 +78,7 @@ new Vue({
         axios.get('api/v1/app/events/')
             .then(response => (
                 this.all_events = response.data,
-                // this.detail_event = this.all_events[0],
-                // this.flag = true
+                // Show first event 
                 this.get_event(this.all_events[0])
             ))
         axios.get('api/v1/app/')
