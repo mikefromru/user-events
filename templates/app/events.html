@@ -2,6 +2,8 @@
 {% load static %}
 {% block content %}
 <div id="app">
+    <!-- current user id so to get its in app.js file -->
+    {{ request.user.id|json_script:"user_id" }}
     <nav class="navbar navbar-light bg-light">
         <a class="navbar-brand" href="#">
             {{ user.username }}
@@ -10,6 +12,7 @@
     </nav>
     {% verbatim %}
     <div class="container">
+
         <div class="row">
             <div class="col-4">
                 <!-- All events -->
@@ -36,7 +39,8 @@
                     <div v-for="(x, index) in detail_event.participants">
                     <a href="#" @click="get_user_info(x)">{{ index + 1}} {{ x.first_name }} {{ x.last_name }}</a>
                     </div>
-                    <button class="btn btn-primary" @click="get_participate_or_stop">Принять участие</button>
+                    <br>
+                    <button class="btn btn-primary" @click="participate_or_stop">{{ name_button }}</button>
                 </div>
             </div>
             <!-- Info about user -->
