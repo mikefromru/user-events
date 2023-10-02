@@ -21,62 +21,15 @@ new Vue({
             id_event = this.detail_event.id + '/'
             axios.patch('/api/v1/app/event/' + id_event)
                 .then(response => {
-                    // participants = this.detail_event.participants.find(obj => obj.id == 2),
-                    // let event_ = this.all_events.find(obj => obj.id == 2)
-                    // if (event_) {
-                        // console.log(event_, ' event')
                     this.detail_event = response.data
-                    let index = this.all_events.findIndex(x => x.id === 2)
-                    console.log(index, ' kak')
+                    let index = this.all_events.findIndex(x => x.id === this.detail_event.id)
                     if (index !== -1) {
-                        console.log(this.all_events[index], ' << index')
-                        console.log(this.detail_event, ' << detail event')
-                        this.all_events[index] == this.detail_event
+                        this.all_events[index] = this.detail_event
                         console.log('updated successfuly')
-                        console.log(this.all_events, ' new')
-
-                        // this.all_events[event_] = {}
-                        // console.log(this.all_events[event_], ' must be changed')
-                        // this. this.all_events[event_], ' must be changed')
-
-                        // console.log(this.detail_event, ' this')
-                        // console.log('I have it ', ' this')
                     }else{
-
-                        console.log('NOOOO')
+                        console.log('Nothing changed')
                     }
-                    
-
-
-
-
-                    // console.log(this.all_events, ' ALL EVENTS'),
-                    // this.detail_event = response.data,
-                    // item = this.detail_event.participants.find(obj => obj.id == this.currrent_user_id),
-                    // console.log(item, ' ITEM'),
-                    // console.log(this.all_events[item], ' first one'),
-                    // this.all_events[item] == this.detail_event,
-                    // console.log(this.all_events[item], ' second one')
-
-                    // this.all_events = []
                 })
-
-            
-            // console.log(this.detail_event, ' this is tmp')
-            // item = this.detail_event.participants.find(obj => obj.id == this.currrent_user_id),
-
-            // if (index !== -1) {
-            //     console.log(this.all_events[index], ' << index')
-            //     console.log(this.detail_event, ' << detail event')
-            //     this.all_events[index] == this.detail_event
-            //     console.log('updated successfuly')
-            // }else{
-            //     console.log('it not found')
-            // }
-
-
-            console.log('--------------')
-            console.log(this.all_events)
 
             exists = this.detail_event.participants.some(obj => obj.id == this.currrent_user_id)
             if (exists) {
@@ -84,7 +37,6 @@ new Vue({
             }else{
                 this.name_button = 'Отказаться от участия'
             }
-
 
     },
         close() {
