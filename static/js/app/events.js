@@ -77,13 +77,15 @@ new Vue({
     mounted() {
         axios.get('api/v1/app/events/')
             .then(response => (
-                this.all_events = response.data
+                this.all_events = response.data,
+                // Show first event 
+                this.get_event(this.all_events[0])
             ))
         axios.get('api/v1/app/')
             .then(response => (
                 this.user_events = response.data
-                // console.log(response.data)
             ))
+
         this.currrent_user_id = JSON.parse(document.getElementById('user_id').textContent);
     }
 })
