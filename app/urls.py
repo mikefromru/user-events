@@ -1,7 +1,8 @@
 from django.urls import path
+from django.views.generic import TemplateView
 from .views import views
 
 urlpatterns = [
-    path('', views.index, name='index'),
-    path('login/', views.index, name='login'),
+    # path(r'', TemplateView.as_view(template_name='app/app.html'), name='app'),
+    path(r'', views.foo, name='app'),
 ]

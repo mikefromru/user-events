@@ -1,9 +1,6 @@
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 
-def index(request):
+@login_required(login_url='/accounts/signin/')
+def foo(request):
     return render(request, 'app/app.html')
-
-def login(request):
-    return render(request, 'app/login.html')
-
-
