@@ -70,7 +70,7 @@ new Vue({
             axios.post('/accounts/logout/', { 'revoke_token': true })
                 .then(response => (
                     console.log(response.data),
-                    window.location.reload()
+                    window.location.href = '/accounts/signin/'
                 ))
         }
     },

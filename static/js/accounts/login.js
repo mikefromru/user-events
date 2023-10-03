@@ -1,3 +1,4 @@
+console.log('<<<<< Helloo worlf >>>>>>')
 new Vue({
     // delimiters: ['[[', ']]'],
     el: '#login-app',
@@ -13,10 +14,11 @@ new Vue({
         },
         login() {
             payload = {'login': 'admin', 'password': 'admin'}
-            axios.post('accounts/login/', body=payload)
+            axios.post('/accounts/login/', body=payload)
             .then(response => (
                 console.log(response.data),
-                window.location.reload()
+                // window.location.reload()
+                window.location.href = '/'
             ))
             .catch(function (error) {
                 if (error.response) {
