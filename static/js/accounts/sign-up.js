@@ -7,6 +7,7 @@ new Vue({
             last_name: '',
             password: '',
             password_confirm: '',
+            errors: {},
         }
     },
     methods: {
@@ -14,24 +15,19 @@ new Vue({
             axios.defaults.xsrfCookieName = 'csrftoken'
             axios.defaults.xsrfHeaderName = 'X-CSRFToken'
             payload = {
-                username: this.username,
-                first_name: this.first_name,
-                last_name: this.last_name,
-                password: this.password,
-                password_confirm: this.password_confirm,
+                'username': this.username,
+                'first_name': this.first_name,
+                'last_name': this.last_name,
+                'password': this.password,
+                'password_confirm': this.password_confirm,
             }
             axios.post('/accounts/register/', body=payload)
             .then(response => (
                 window.location.href = '/'
             ))
-            .catch(function (error) {
-                if (error.response) {
-                    console.log('error.response.data')
-                    if (error.response.status == 401) {
-                        console.log('401')
-                    }
-
-                }
+            .catch(error => {
+                this.errors = error.response.data
+                // console.log(this.errors_, ' <<< error')
             })
         }
     }
