@@ -17,7 +17,7 @@
 {% if user.is_authenticated %}
     {% include 'app/events.html' %}
 {% else %}
-    {% include 'app/login.html' %}
+    {% include 'accounts/login.html' %}
 {% endif %}
 
 <script src="{% static 'js/app/events.js' %}"></script>
