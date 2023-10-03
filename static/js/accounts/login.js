@@ -6,6 +6,7 @@ new Vue({
         return {
             username: '',
             password: '',
+            errors: {},
         }
     },
     methods: {
@@ -20,14 +21,8 @@ new Vue({
                 // window.location.reload()
                 window.location.href = '/'
             ))
-            .catch(function (error) {
-                if (error.response) {
-                    console.log('error.response.data')
-                    if (error.response.status == 401) {
-                        console.log('401')
-                    }
-
-                }
+            .catch(error => {
+                this.errors = error.response.data
             })
         },
     }

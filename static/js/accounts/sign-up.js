@@ -27,8 +27,8 @@ new Vue({
             ))
             .catch(error => {
                 this.errors = error.response.data
-                // console.log(this.errors_, ' <<< error')
             })
+
         }
     }
 })

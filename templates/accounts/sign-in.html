@@ -5,6 +5,11 @@
 <div id="login-app" class="container">
     <div>
         <h1>Sign In</h1>
+        {% verbatim %}
+        <li v-for="x in errors">
+        {{ x.toString() }} 
+        </li>
+        {% endverbatim %}
         <form>
             <div class="form-group mb-3">
                 <input v-model="username" type="email" class="form-control" id="exampleInputEmail1"

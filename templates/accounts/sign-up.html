@@ -4,13 +4,13 @@
 
 
 <div id="sign-up" class="container">
-    {% verbatim %}
-    <li v-for="(x, key) in errors">
-       {{ key }} - {{ x.toString() }} 
-    </li>
-    {% endverbatim %}
     <div>
         <h1>Sign Up</h1>
+        {% verbatim %}
+        <li v-for="(x, key) in errors">
+        {{ key }} - {{ x.toString() }} 
+        </li>
+        {% endverbatim %}
         <form>
             <div class="form-group mb-3">
                 <input v-model="username" type="text" class="form-control" placeholder="Username">
