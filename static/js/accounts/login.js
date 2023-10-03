@@ -13,7 +13,7 @@ new Vue({
             console.log('click on button')
         },
         login() {
-            payload = {'login': 'admin', 'password': 'admin'}
+            payload = {'login': this.username, 'password': this.password}
             axios.post('/accounts/login/', body=payload)
             .then(response => (
                 console.log(response.data),
