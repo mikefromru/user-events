@@ -6,6 +6,7 @@ new Vue({
         return {
             username: '',
             password: '',
+            errors: {},
         }
     },
     methods: {
@@ -13,21 +14,15 @@ new Vue({
             console.log('click on button')
         },
         login() {
-            payload = {'login': 'admin', 'password': 'admin'}
+            payload = {'login': this.username, 'password': this.password}
             axios.post('/accounts/login/', body=payload)
             .then(response => (
                 console.log(response.data),
                 // window.location.reload()
                 window.location.href = '/'
             ))
-            .catch(function (error) {
-                if (error.response) {
-                    console.log('error.response.data')
-                    if (error.response.status == 401) {
-                        console.log('401')
-                    }
-
-                }
+            .catch(error => {
+                this.errors = error.response.data
             })
         },
     }
