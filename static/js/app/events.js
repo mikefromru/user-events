@@ -15,7 +15,7 @@ new Vue({
     },
     computed: {
         format_created_at: function() {
-            var isoDate = this.detail_event.created_at 
+            const isoDate = this.detail_event.created_at 
             const date = new Date(isoDate);
             const year = date.getFullYear()
             const month = date.getMonth() + 1
