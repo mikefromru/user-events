@@ -13,8 +13,8 @@
     </nav>
     {% verbatim %}
     <div class="container-fluid">
-
-        <div class="row">
+        <!-- Show events -->
+        <div v-if="all_events.length > 0" class="row">
             <div class="col-4">
                 <!-- All events -->
                 <h5>Все события</h5>
@@ -33,7 +33,7 @@
                 <div>
                     <h5>{{ detail_event.title }}</h5>
                     <p>{{ detail_event.body }}</p>
-                    <p>{{ new Date( detail_event.created_at ).toLocaleDateString() }}</p>
+                    <p>Дата создания: {{ new Date( detail_event.created_at ).toLocaleDateString() }}</p>
                 </div>
                 <div v-if="flag">
                     <h5>Участники</h5>
@@ -52,6 +52,10 @@
                 <p>Фамилия: {{ user_info.last_name }}</p>
                 <button class="btn btn-primary">Ok</button>
             </div>
+        </div>
+        <!-- Say no events  -->
+        <div v-else>
+            <h3><center>Нет событий</center></h3>
         </div>
     </div>
     {% endverbatim %}
