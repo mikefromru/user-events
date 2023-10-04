@@ -13,19 +13,6 @@ new Vue({
             show_user_info: false,
         }
     },
-    computed: {
-        format_created_at: function() {
-            const isoDate = this.detail_event.created_at 
-            const date = new Date(isoDate);
-            const year = date.getFullYear()
-            const month = date.getMonth() + 1
-            const day = date.getDate()
-            const hours = date.getHours()
-            const minutes = date.getMinutes();
-            const formattedDate = `${year}-${month}-${day} ${hours}:${minutes}`
-            return formattedDate
-        }
-    },
     methods: {
         participate_or_stop(x) {
             axios.defaults.xsrfCookieName = 'csrftoken'
