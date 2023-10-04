@@ -1,5 +1,4 @@
 new Vue({
-    // delimiters: ['[[', ']]'],
     el: '#app',
     data() {
         return {
