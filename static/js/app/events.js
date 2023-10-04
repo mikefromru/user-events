@@ -83,7 +83,6 @@ new Vue({
             .then(response => (
                 this.all_events = response.data,
                 // Show first event 
-                console.log(this.all_events.length),
                 this.get_event(this.all_events[0])
             ))
             // .catch(error => {
