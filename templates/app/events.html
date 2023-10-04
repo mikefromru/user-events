@@ -33,7 +33,7 @@
                 <div>
                     <h5>{{ detail_event.title }}</h5>
                     <p>{{ detail_event.body }}</p>
-                    <p>{{ detail_event.created_at }}</p>
+                    <p>Время создания: {{ format_created_at }}</p>
                 </div>
                 <div v-if="flag">
                     <h5>Участники</h5>

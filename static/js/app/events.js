@@ -1,5 +1,4 @@
 new Vue({
-    // delimiters: ['[[', ']]'],
     el: '#app',
     data() {
         return {
@@ -12,6 +11,19 @@ new Vue({
             user_info: {},
             show_detail_even_block: true,
             show_user_info: false,
+        }
+    },
+    computed: {
+        format_created_at: function() {
+            var isoDate = this.detail_event.created_at 
+            const date = new Date(isoDate);
+            const year = date.getFullYear()
+            const month = date.getMonth() + 1
+            const day = date.getDate()
+            const hours = date.getHours()
+            const minutes = date.getMinutes();
+            const formattedDate = `${year}-${month}-${day} ${hours}:${minutes}`
+            return formattedDate
         }
     },
     methods: {
