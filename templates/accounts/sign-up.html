@@ -4,32 +4,34 @@
 
 
 <div id="sign-up" class="container">
-    <div>
-        <h1>Sign Up</h1>
-        {% verbatim %}
-        <li v-for="(x, key) in errors">
-        {{ key }} - {{ x.toString() }} 
-        </li>
-        {% endverbatim %}
-        <form>
-            <div class="form-group mb-3">
-                <input v-model="username" type="text" class="form-control" placeholder="Username">
-            </div>
-            <div class="form-group mb-3">
-                <input v-model="first_name" type="text" class="form-control" placeholder="First name">
-            </div>
-            <div class="form-group mb-3">
-                <input v-model="last_name" type="text" class="form-control" placeholder="Last name">
-            </div>
-            <div class="form-group mb-3">
-                <input v-model="password" type="password" class="form-control" placeholder="Password">
-            </div>
-            <div class="form-group mb-3">
-                <input v-model="password_confirm" type="password" class="form-control" placeholder="Password confirm">
-            </div>
-            <button type="button" class="btn btn-primary" @click="register">Sign Up</button>
-        </form>
-        <a href="{% url 'sign-in' %}">Sign In</a>
+    <div class="main-div-card">
+        <div class="card p-3" style="width: 30rem;">
+            <p class="card-title text-center p-3 fs-3">Зарегистрироваться</p>
+            {% verbatim %}
+            <li class="p-3 text-danger" v-for="(x, key) in errors">
+            {{ key }} - {{ x.toString() }} 
+            </li>
+            {% endverbatim %}
+            <form>
+                <div class="form-group mb-3">
+                    <input v-model="username" type="text" class="form-control" placeholder="Логин *">
+                </div>
+                <div class="form-group mb-3">
+                    <input v-model="first_name" type="text" class="form-control" placeholder="Имя *">
+                </div>
+                <div class="form-group mb-3">
+                    <input v-model="last_name" type="text" class="form-control" placeholder="Фамилия *">
+                </div>
+                <div class="form-group mb-3">
+                    <input v-model="password" type="password" class="form-control" placeholder="Пароль *">
+                </div>
+                <div class="form-group mb-3">
+                    <input v-model="password_confirm" type="password" class="form-control" placeholder="Подтвердить пароль *">
+                </div>
+                <button type="button" class="btn btn-primary" @click="register">Регистрация</button>
+            </form>
+            <p class="fs-6 pt-3"><a href="{% url 'sign-in' %}">Войти</a></p>
+        </div>
     </div>
 </div>
 

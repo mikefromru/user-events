@@ -49,11 +49,16 @@ new Vue({
             this.show_user_info = true
         },
         get_name_for_button(ev) {
-            let exists = ev.participants.some(obj => obj.id == this.currrent_user_id)
-            if (exists) {
-                this.name_button = 'Отказаться от участия'
-            }else{
-                this.name_button = 'Принять участие'
+            try {
+                let exists = ev.participants.some(obj => obj.id == this.currrent_user_id)
+                if (exists) {
+                    this.name_button = 'Отказаться от участия'
+                }else{
+                    this.name_button = 'Принять участие'
+                }
+            }
+            catch(err) {
+                console.log('Something went wrong')
             }
 
         },
@@ -80,6 +85,9 @@ new Vue({
                 // Show first event 
                 this.get_event(this.all_events[0])
             ))
+            // .catch(error => {
+                // console.log(error.response.data, ' <<<<< error')
+            // })
         axios.get('api/v1/app/')
             .then(response => (
                 this.user_events = response.data
