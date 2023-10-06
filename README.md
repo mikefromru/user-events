@@ -1,5 +1,5 @@
 # События
-## _Welcome to the this web service_
+## _Добро пожаловать!_
 
 Приложение для создание событий. Каждый зарегистрированный пользователь может создать событие, удалить своё событие, присоединится к событию которое было созданно другими пользователями.
 Основной функционал приложения написанн с использованием Django(DRF). Также используется интерфейс написан на Vue.js который используется в Django шаблонах.
@@ -19,18 +19,35 @@
 
 ```sh
 cd user-events
-python pip requirements.txt
+cp project/settings/example.env project/settings/.env
+```
+
+Установите переменные окружения в `.env` файле (Обязательные переменные приведены ниже)
+```
+SECRET_KEY=your-secret-key
+```
+
+Установка зависимостей, выполнение миграций
+
+```
+pip install -r requirements.txt
 python manage.py migrate
-pyton manage.py runserver
 ```
 
-For production environments...
-
-```sh
+Запуск с настройками development 
 
 ```
+python manage.py runserver --settings=project.settings.development
+``````
+
+Запуска с настройками production
+```
+python manage.py runserver --settings=project.settings.production
+```
+
+
 ## Использование
-- Зарегистрирроваться POST `/accounts/register/`
+- Зарегистрироваться POST `/accounts/register/`
 - Войти в систему POST `/accounts/login/`
 - Создать событие POST `/app/`
 - Получить все события GET `/events/`
