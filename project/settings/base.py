@@ -27,19 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 from django.core.management.utils import get_random_secret_key
 
-# SECRET_KEY = env('SECRET_KEY')
-# if not env('SECRET_KEY'):
-
-def get_env_secret_key():
-    if env('SECRET_KEY'):
-      return env('SECRET_KEY')
-    else:
-      secret_key = get_random_secret_key
-      os.environ["SECRET_KEY"] = secret_key
-      return secret_key
-    
-SECRET_KEY = get_env_secret_key()
-
+SECRET_KEY = env('SECRET_KEY')
 
 # Application definition
 
