@@ -46,8 +46,8 @@ class TestAppView(APITestCase):
     def test_create_event(self):
         self.client.credentials(HTTP_AUTHORIZATION='TOKEN ' + str(self.token[0]))
         payload = {
-            'title': 'Title_1',
-            'body': 'Hellow World',
+            'title': 'A movie',
+            'body': 'Watching an action movie online with the friends',
             'creator': 1,
             'participants': 1,
         }
@@ -57,8 +57,8 @@ class TestAppView(APITestCase):
     def test_create_event_another_one(self):
         self.client.credentials(HTTP_AUTHORIZATION='TOKEN ' + str(self.token[0]))
         payload = {
-            'title': 'Title_2',
-            'body': 'Hellow World',
+            'title': 'Hiking',
+            'body': 'Hiking with friends in a city that located near by Moscow',
             'creator': 1,
             'participants': 1,
         }
@@ -73,6 +73,9 @@ class TestAppView(APITestCase):
         self.client.credentials(HTTP_AUTHORIZATION='TOKEN ' + str(self.token[0]))
         response = self.client.delete(reverse('event', args=[2]))
         self.assertEquals(response.status_code, 204)
+        events = Event.objects.all()
+        self.assertEquals(events.count(), 1)
+
 
     def test_stop_being_participate(self):
         self.client.credentials(HTTP_AUTHORIZATION='TOKEN ' + str(self.token[0]))
