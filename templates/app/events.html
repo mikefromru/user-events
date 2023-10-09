@@ -14,13 +14,15 @@
     {% verbatim %}
     <div class="container-fluid">
         <!-- Show events -->
-        <div v-if="all_events.length > 0" class="row">
+        <div v-if="all_events.count > 0" class="row">
             <div class="col-4">
                 <!-- All events -->
                 <h5>Все события</h5>
-                <li v-for="x in all_events">
+                <li v-for="x in all_events.results">
                     <a href="#" @click='get_event(x)'>{{ x.title }}</a>
                 </li>
+                <button class="btn btn-link" @click="previous"><<</button><span>{{ current_page }}</span><button class="btn btn-link" @click="next">>></button>
+                <br>
                 <br>
                 <!-- current user event -->
                 <h5>Мои события</h5>

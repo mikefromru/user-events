@@ -6,16 +6,22 @@ from ..serializers import EventSerializer
 from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404
 from rest_framework import status
+from rest_framework.pagination import PageNumberPagination
 
+from rest_framework.generics import ListAPIView
 
 User = get_user_model()
 
-class EventListAPIView(APIView):
 
-    def get(self, request):
-        queryset = Event.objects.all()
-        serializer = EventSerializer(queryset, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+class EventAPIListPagination(PageNumberPagination):
+    page_size = 10
+    page_size_query_param = 'page_size'
+
+class EventListAPIView(ListAPIView):
+    
+    pagination_class = EventAPIListPagination
+    queryset = Event.objects.all()
+    serializer_class = EventSerializer
 
 class EventAPIView(APIView):
 
