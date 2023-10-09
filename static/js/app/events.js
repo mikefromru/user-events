@@ -27,8 +27,16 @@ new Vue({
             .then(response => {
                this.user_events = this.user_events.filter((item) => item.id !== this.detail_event.id) 
                this.all_events.results = this.all_events.results.filter((item) => item.id !== this.detail_event.id) 
-               this.get_event(this.user_events[0])
                this.is_show_create_even_block = false
+               this.get_event(this.all_events.results[0])
+            //    try {
+            //     console.log('try')
+            //     this.get_event(this.user_events[0])
+            //    }catch{
+            //     console.log('catch')
+            //     this.get_event(this.all_events.results[0])
+            //    }
+
             })
         },
         create_event() {
@@ -46,10 +54,7 @@ new Vue({
                 this.is_show_create_even_block = false,
                 this.show_detail_even_block = true,
                 this.user_events.push(this.detail_event),
-                this.all_events.results.push(this.detail_event),
-                console.log(this.detail_event, ' detail event'),
-                console.log('-----------------')
-                // console.log(this.all_events, ' all_events')
+                this.all_events.results.push(this.detail_event)
             ))
             .catch(error => {
                 this.errors = error.response.data
