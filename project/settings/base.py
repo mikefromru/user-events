@@ -17,15 +17,7 @@ import os
 env = environ.Env()
 env.read_env()
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
-
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-from django.core.management.utils import get_random_secret_key
 
 SECRET_KEY = env('SECRET_KEY')
 
@@ -141,8 +133,8 @@ AUTH_USER_MODEL = 'accounts.CustomUser'
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.TokenAuthentication',
     ],
     'DEFAULT_FILTER_BACKENDS': [
@@ -154,8 +146,7 @@ REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': [
         'rest_framework.renderers.JSONRenderer',
         'rest_framework.renderers.BrowsableAPIRenderer',
-    ]
-
+    ],
 }
 
 REST_REGISTRATION = {
@@ -167,4 +158,4 @@ REST_REGISTRATION = {
 CSRF_TRUSTED_ORIGINS = ['https://*', 'http://*']
 CSRF_HEADER_NAME = 'HTTP_X_CSRFTOKEN'
 
-LANGUAGE_CODE = 'ru-ru'
+# LANGUAGE_CODE = 'ru-ru'

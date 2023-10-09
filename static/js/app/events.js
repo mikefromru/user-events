@@ -11,9 +11,35 @@ new Vue({
             user_info: {},
             show_detail_even_block: true,
             show_user_info: false,
+            current_page: 1,
         }
     },
     methods: {
+        get_previous_or_next_page(url_page) {
+            axios.get(url_page)
+            .then(response => (
+                this.all_events = response.data,
+                // Show first event 
+                this.get_event(this.all_events.results[0])
+            ))
+           
+        },
+        previous(x) {
+            url_page = this.all_events.previous
+            if (url_page) {
+                this.get_previous_or_next_page(url_page)
+                this.current_page -= 1
+            }
+        },
+        next(x) {
+            url_page = this.all_events.next
+            if (url_page) {
+                this.get_previous_or_next_page(url_page)
+                this.current_page += 1
+            }
+
+        },
+
         participate_or_stop(x) {
             axios.defaults.xsrfCookieName = 'csrftoken'
             axios.defaults.xsrfHeaderName = 'X-CSRFToken'
@@ -81,13 +107,12 @@ new Vue({
     mounted() {
         axios.get('api/v1/app/events/')
             .then(response => (
+                console.log(response.data, ' <<<<<<<<<<<'),
                 this.all_events = response.data,
                 // Show first event 
-                this.get_event(this.all_events[0])
+                this.get_event(this.all_events.results[0])
             ))
-            // .catch(error => {
-                // console.log(error.response.data, ' <<<<< error')
-            // })
+
         axios.get('api/v1/app/')
             .then(response => (
                 this.user_events = response.data

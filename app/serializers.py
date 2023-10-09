@@ -10,10 +10,16 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ('id', 'first_name', 'last_name')
 
-
 class EventSerializer(serializers.ModelSerializer):
 
     participants = UserSerializer(many=True, read_only=False)
+
+    class Meta:
+        model = Event
+        fields = ('id', 'title', 'body', 'created_at', 'creator', 'participants')
+
+
+class EventPostSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Event

@@ -54,7 +54,7 @@ class TestAppView(APITestCase):
         response = self.client.post(reverse('event-user-list'), data=payload)
         self.assertEquals(response.status_code, 201)
 
-    def test_create_event(self):
+    def test_create_event_another_one(self):
         self.client.credentials(HTTP_AUTHORIZATION='TOKEN ' + str(self.token[0]))
         payload = {
             'title': 'Title_2',
