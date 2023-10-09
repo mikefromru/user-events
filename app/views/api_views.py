@@ -2,7 +2,7 @@ from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from ..models import Event
-from ..serializers import EventSerializer
+from ..serializers import EventSerializer, EventPostSerializer
 from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404
 from rest_framework import status
@@ -18,7 +18,7 @@ class EventAPIListPagination(PageNumberPagination):
     page_size_query_param = 'page_size'
 
 class EventListAPIView(ListAPIView):
-    
+
     pagination_class = EventAPIListPagination
     queryset = Event.objects.all()
     serializer_class = EventSerializer
@@ -33,7 +33,8 @@ class EventAPIView(APIView):
 
     # Create user event and become participant
     def post(self, request, *args, **kwargs):
-        serializer = EventSerializer(data=request.data)
+        serializer = EventPostSerializer(data=request.data)
+        print(request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=201)

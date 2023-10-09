@@ -18,7 +18,6 @@ new Vue({
         get_previous_or_next_page(url_page) {
             axios.get(url_page)
             .then(response => (
-                console.log(response.data, ' <<<<<<<<<<<'),
                 this.all_events = response.data,
                 // Show first event 
                 this.get_event(this.all_events.results[0])
