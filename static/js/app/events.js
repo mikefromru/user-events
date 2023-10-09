@@ -28,14 +28,11 @@ new Vue({
                this.user_events = this.user_events.filter((item) => item.id !== this.detail_event.id) 
                this.all_events.results = this.all_events.results.filter((item) => item.id !== this.detail_event.id) 
                this.is_show_create_even_block = false
-               this.get_event(this.all_events.results[0])
-            //    try {
-            //     console.log('try')
-            //     this.get_event(this.user_events[0])
-            //    }catch{
-            //     console.log('catch')
-            //     this.get_event(this.all_events.results[0])
-            //    }
+               if (this.all_events.results.length === 0) {
+                   window.location.reload() 
+                }else{
+                   this.get_event(this.all_events.results[0])
+               }
 
             })
         },
