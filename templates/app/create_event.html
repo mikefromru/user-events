@@ -1,0 +1,25 @@
+<!-- the block to create event -->
+<div v-if="is_show_create_even_block" class="col">
+<!-- <div> -->
+    <div class="card p-3" style="width: 30rem;">
+        <p class="card-title text-center p-3 fs-3">Создать событие</p>
+        {% verbatim %}
+        <li class="p-3 text-danger" v-for="(x, key) in errors">
+            {{key}} - {{ x.toString() }}
+        </li>
+        {% endverbatim %}
+
+        <form>
+            <div class="form-group mb-3">
+                <input v-model="title" class="form-control" placeholder="Название событие">
+            </div>
+            <div class="form-floating mb-3">
+                <textarea v-model="body" type="body" class="form-control" id="floatingTextarea2"></textarea>
+                <label for="floatingTextarea2">Comments</label>
+            </div>
+            <button type="button" class="btn btn-primary" @click="create_event">Создать</button>
+            <button type="button" class="btn btn-outline-secondary" @click="cancel_create_event">Отменить</button>
+        </form>
+
+    </div>
+</div>

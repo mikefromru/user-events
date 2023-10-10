@@ -20,6 +20,12 @@ new Vue({
         }
     },
     methods: {
+        cancel_create_event() {
+            this.is_show_create_even_block = false
+            this.show_detail_even_block = true
+            this.errors = {}
+
+        },
         remove() {
             axios.defaults.xsrfCookieName = 'csrftoken'
             axios.defaults.xsrfHeaderName = 'X-CSRFToken'
@@ -51,7 +57,8 @@ new Vue({
                 this.is_show_create_even_block = false,
                 this.show_detail_even_block = true,
                 this.user_events.push(this.detail_event),
-                this.all_events.results.push(this.detail_event)
+                this.all_events.results.push(this.detail_event),
+                this.errors = {}
             ))
             .catch(error => {
                 this.errors = error.response.data
