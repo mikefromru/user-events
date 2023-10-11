@@ -118,22 +118,10 @@ new Vue({
                         }else{
                             this.name_button = 'Принять участие'
                         }
-
-
-
-
                     }else{
                         console.log('Nothing changed')
                     }
                 })
-
-            // exists = this.detail_event.participants.some(obj => obj.id == this.current_user_id)
-            // if (exists) {
-            //     this.name_button = 'Отказаться от участия'
-            // }else{
-            //     this.name_button = 'Принять участие'
-            // }
-
 
     },
         close() {
