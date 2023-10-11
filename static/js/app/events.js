@@ -42,7 +42,7 @@ new Vue({
 
             })
         },
-        create_event() {
+        create_event(a) {
             axios.defaults.xsrfCookieName = 'csrftoken'
             axios.defaults.xsrfHeaderName = 'X-CSRFToken'
             payload = {
@@ -52,17 +52,20 @@ new Vue({
                 'participants': [this.current_user_id],
             }
             axios.post('api/v1/app/', body=payload)
-            .then(response => (
-                this.detail_event = response.data,
-                this.is_show_create_even_block = false,
-                this.show_detail_even_block = true,
-                this.user_events.push(this.detail_event),
-                this.all_events.results.push(this.detail_event),
-                this.errors = {}
-            ))
-            .catch(error => {
-                this.errors = error.response.data
-            })
+                .then(response => {
+                    this.detail_event = response.data,
+                    console.log(this.detail_event, ' <<<< detail event from POST method')
+                    this.is_show_create_even_block = false,
+                    this.show_detail_even_block = true,
+                    this.user_events.push(this.detail_event),
+                    this.all_events.results.push(this.detail_event),
+                    this.errors = {}
+                    // window.location.reload()
+                    // console.log(this.all_events.count += 1)
+                })
+                .catch(error => {
+                    this.errors = error.response.data
+                })
         },
         add_event() {
             this.show_detail_even_block = false

@@ -14,7 +14,7 @@
     {% verbatim %}
     <div class="container">
         <!-- Show events -->
-        <div v-if="all_events.count > 0" class="row">
+        <div v-if="all_events.count" class="row">
             <div class="col-4">
                 <!-- All events -->
                 <h5>Все события</h5>
@@ -35,27 +35,6 @@
             {% endverbatim %}
             <!-- the block to create event -->
             {% include 'app/create_event.html' %}
-            <!-- <div v-if="is_show_create_even_block" class="col">
-                <div class="card p-3" style="width: 30rem;">
-                    <p class="card-title text-center p-3 fs-3">Создать событие</p>
-                    <li class="p-3 text-danger" v-for="(x, key) in errors">
-
-                    </li>
-
-                    <form>
-                        <div class="form-group mb-3">
-                            <input v-model="title"class="form-control" placeholder="Название событие">
-                        </div>
-                        <div class="form-floating mb-3">
-                            <textarea v-model="body" type="body" class="form-control" id="floatingTextarea2"></textarea>
-                              <label for="floatingTextarea2">Comments</label>
-                        </div>
-                        <button type="button" class="btn btn-primary" @click="create_event">Создать</button>
-                        <button type="button" class="btn btn-outline-secondary" @click="cancel_create_event">Отменить</button>
-                    </form>
-
-                </div>
-            </div> -->
             {% verbatim %}
             <!-- Name of chosen event -->
             <div v-if="show_detail_even_block" class="col">
@@ -66,8 +45,11 @@
                 </div>
                 <div v-if="flag">
                     <h5>Участники</h5>
-                    <div v-for="(x, index) in detail_event.participants">
-                    <a href="#" @click="get_user_info(x)">{{ index + 1}} {{ x.first_name }} {{ x.last_name }}</a>
+                    <div>
+                        <div v-for="(x, index) in detail_event.participants">
+                            <a href="#" @click="get_user_info(x)">{{ index + 1}} {{ x.first_name }} {{ x.last_name }}</a>
+                        </div>
+
                     </div>
                     <br>
                     <button class="btn btn-primary" @click="participate_or_stop">{{ name_button }}</button>
@@ -88,12 +70,14 @@
                 <button class="btn btn-primary">Ok</button>
             </div>
         </div>
-    {% endverbatim %}
         <!-- Say no events  -->
+        {% endverbatim %}
         <div v-else>
-            <h3><center>Нет событий</center></h3>
-            <button type='' class="btn btn-primary" @click="add_event">Создать событие!</button>
-            {% include 'app/create_event.html' %}
+            <!-- <h3><center>Нет событий</center></h3> -->
+            <!-- <button type='' class="btn btn-primary" @click="add_event">Создать событие!</button> -->
+            <div class="main-div-card" v-if="is_show_create_even_block = true">
+                {% include 'app/create_event.html' %}
+            </div>
         </div>
     </div>
 </div>
