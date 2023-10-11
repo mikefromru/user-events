@@ -5,7 +5,7 @@ new Vue({
             all_events: [],
             detail_event: {},
             user_events: [],
-            name_button: '',
+            name_button: 'Отказаться от участия',
             current_user_id: null,
             flag: false,
             user_info: {},
@@ -20,6 +20,12 @@ new Vue({
         }
     },
     methods: {
+        cancel_create_event() {
+            this.is_show_create_even_block = false
+            this.show_detail_even_block = true
+            this.errors = {}
+
+        },
         remove() {
             axios.defaults.xsrfCookieName = 'csrftoken'
             axios.defaults.xsrfHeaderName = 'X-CSRFToken'
@@ -36,7 +42,7 @@ new Vue({
 
             })
         },
-        create_event() {
+        create_event(a) {
             axios.defaults.xsrfCookieName = 'csrftoken'
             axios.defaults.xsrfHeaderName = 'X-CSRFToken'
             payload = {
@@ -46,16 +52,20 @@ new Vue({
                 'participants': [this.current_user_id],
             }
             axios.post('api/v1/app/', body=payload)
-            .then(response => (
-                this.detail_event = response.data,
-                this.is_show_create_even_block = false,
-                this.show_detail_even_block = true,
-                this.user_events.push(this.detail_event),
-                this.all_events.results.push(this.detail_event)
-            ))
-            .catch(error => {
-                this.errors = error.response.data
-            })
+                .then(response => {
+                    this.detail_event = response.data,
+                    console.log(this.detail_event, ' <<<< detail event from POST method')
+                    this.is_show_create_even_block = false,
+                    this.show_detail_even_block = true,
+                    this.user_events.push(this.detail_event),
+                    this.all_events.results.push(this.detail_event),
+                    this.errors = {}
+                    // window.location.reload()
+                    console.log(this.all_events.count += 1)
+                })
+                .catch(error => {
+                    this.errors = error.response.data
+                })
         },
         add_event() {
             this.show_detail_even_block = false
@@ -100,17 +110,30 @@ new Vue({
                         this.all_events.results[index] = this.detail_event
                         this.user_events[index_] = this.detail_event
                         console.log('updated successfuly')
+                        console.log(this.detail_event.participants, ' <<<<<<')
+
+                        exists = this.detail_event.participants.some(obj => obj.id == this.current_user_id)
+                        if (exists) {
+                            this.name_button = 'Отказаться от участия'
+                        }else{
+                            this.name_button = 'Принять участие'
+                        }
+
+
+
+
                     }else{
                         console.log('Nothing changed')
                     }
                 })
 
-            exists = this.detail_event.participants.some(obj => obj.id == this.current_user_id)
-            if (exists) {
-                this.name_button = 'Принять участие'
-            }else{
-                this.name_button = 'Отказаться от участия'
-            }
+            // exists = this.detail_event.participants.some(obj => obj.id == this.current_user_id)
+            // if (exists) {
+            //     this.name_button = 'Отказаться от участия'
+            // }else{
+            //     this.name_button = 'Принять участие'
+            // }
+
 
     },
         close() {
