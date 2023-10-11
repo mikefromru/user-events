@@ -159,3 +159,4 @@ CSRF_TRUSTED_ORIGINS = ['https://*', 'http://*']
 CSRF_HEADER_NAME = 'HTTP_X_CSRFTOKEN'
 
 # LANGUAGE_CODE = 'ru-ru'
+
