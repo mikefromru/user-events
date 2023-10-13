@@ -9,23 +9,22 @@ services:
     image: user-events
     entrypoint: /docker-entrypoint.sh
     volumes:
-      #- .:/app
-      - static:/app/staticfiles
+      - .:/app
+      - static_volume:/app/staticfiles
 
 
   nginx:
     image: nginx:latest
     container_name: NGNIX
-    #expose:
-      #- 8080
     ports:
       - 8000:80
     volumes:
-      #- .:/app/staticfiles
+      - .:/app/staticfiles
       - ./nginx:/etc/nginx/conf.d
-      - static:/app/staticfiles
+      - static_volume:/app/staticfiles
     depends_on:
       - web
+
 volumes:
-  static:
+  static_volume:
   
