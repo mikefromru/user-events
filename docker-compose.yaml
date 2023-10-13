@@ -2,8 +2,12 @@ version: "3.9"
 
 services:
   web:
-    container_name: user-event
+    container_name: user-events
     build: .
+    restart: always
+    image: user-events
     entrypoint: /docker-entrypoint.sh
     ports:
       - 8000:8000
+    volumes:
+      - .:/app
