@@ -1,13 +1,31 @@
 version: "3.9"
 
 services:
+
   web:
     container_name: user-events
     build: .
     restart: always
     image: user-events
     entrypoint: /docker-entrypoint.sh
-    ports:
-      - 8000:8000
     volumes:
-      - .:/app
+      #- .:/app
+      - static:/app/staticfiles
+
+
+  nginx:
+    image: nginx:latest
+    container_name: NGNIX
+    #expose:
+      #- 8080
+    ports:
+      - 8000:80
+    volumes:
+      #- .:/app/staticfiles
+      - ./nginx:/etc/nginx/conf.d
+      - static:/app/staticfiles
+    depends_on:
+      - web
+volumes:
+  static:
+  
