@@ -11,6 +11,8 @@ services:
     volumes:
       - .:/app
       - static_volume:/app/staticfiles
+    depends_on:
+      - db
 
 
   nginx:
@@ -25,6 +27,18 @@ services:
     depends_on:
       - web
 
+  db:
+    image: postgres:latest
+    container_name: POSTGRES
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+    ports:
+      - 5433:5432
+    volumes:
+      - pgdata:/var/lib/posgresql/data
+
 volumes:
   static_volume:
-  
+  pgdata:
