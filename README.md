@@ -45,6 +45,11 @@ python manage.py runserver --settings=project.settings.development
 python manage.py runserver --settings=project.settings.production
 ```
 
+## Docker
+```
+docker compose up --build
+```
+
 
 ## Использование
 - Зарегистрироваться POST `/accounts/register/`
