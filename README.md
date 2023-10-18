@@ -22,11 +22,11 @@ cd user-events
 cp project/settings/example.env project/settings/.env
 ```
 
-Установите переменные окружения в `.env` файле (Обязательные переменные приведены ниже)
+Установите переменные окружения в `.env` файле (Обязательные переменные приведены ниже для development)
 ```
 SECRET_KEY=your-secret-key
 ```
-Установите переменные окружения в `.env` файле для БД и использования с Docker
+Установите переменные окружения в `.env` файле для БД и использования с Docker в prodaction
 ```
 DB_ENGINE=django.db.backends.postgresql
 DB_NAME=
