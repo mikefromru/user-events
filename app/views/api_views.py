@@ -27,14 +27,13 @@ class EventListAPIView(ListAPIView):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
 
-    @method_decorator(cache_page(60*60*2))
+    @method_decorator(cache_page(timeout=60))
     def get(self, *args, **kwargs):
         return super().get(*args, **kwargs)
 
 class EventAPIView(APIView):
-
     # Get only auth user events
-    @method_decorator(cache_page(60*60*2))
+    @method_decorator(cache_page(timeout=60))
     def get(self, request):
         queryset = Event.objects.filter(creator=request.user)
         serializer = EventSerializer(queryset, many=True)
@@ -45,7 +44,6 @@ class EventAPIView(APIView):
         serializer = EventPostSerializer(data=request.data)
         print(request.data)
         if serializer.is_valid():
-            # serializer.save()
             serializer.save(participants=[self.request.user])
             return Response(serializer.data, status=201)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -61,8 +59,6 @@ class EventDetailAPIView(APIView):
         else:
             # Become participat of event
             event.participants.add(request.user.id)
-            # event.participants.add(request.user.username)
-            # event.participants.add(request.user.username)
         event.save()
         serializer = EventSerializer(event)
         return Response(serializer.data, status=status.HTTP_200_OK)
