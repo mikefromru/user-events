@@ -26,6 +26,15 @@ cp project/settings/example.env project/settings/.env
 ```
 SECRET_KEY=your-secret-key
 ```
+Установите переменные окружения в `.env` файле для БД и использования с Docker
+```
+DB_ENGINE=django.db.backends.postgresql
+DB_NAME=
+DB_USER=
+DB_PASSWORD=
+DB_HOST=db
+DB_PORT=5432
+```
 
 Установка зависимостей, выполнение миграций
 
