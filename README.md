@@ -1,8 +1,8 @@
 # События
 ## _Добро пожаловать!_
 
-Приложение для создание событий. Каждый зарегистрированный пользователь может создать событие, удалить своё событие, присоединится к событию которое было созданно другими пользователями.
-Основной функционал приложения написанн с использованием Django(DRF). Также используется интерфейс написан на Vue.js который используется в Django шаблонах.
+Приложение для создания событий. Каждый зарегистрированный пользователь может создать событие, удалить своё событие, присоединится к событию которое было созданно другими пользователями.
+Приложения написанно с использованием Django(DRF) в качестве бекэнда. Также используется интерфейс написан на Vue.js который и используется в Django шаблонах.
 
 ## Технологии
 
@@ -26,7 +26,20 @@ cp project/settings/example.env project/settings/.env
 ```
 SECRET_KEY=your-secret-key
 ```
-Установите переменные окружения в `.env` файле для БД и использования с Docker в prodaction
+
+Установка зависимостей, выполнение миграций
+```
+pip install -r requirements.txt
+python manage.py migrate
+```
+
+Запуск с настройками development
+```
+python manage.py runserver --settings=project.settings.development
+```
+
+Запуска с настройками production на локальной машине.
+Добавьте переменные окружения в `.env` файле для БД и использования с Docker в prodaction
 ```
 DB_ENGINE=django.db.backends.postgresql
 DB_NAME=
@@ -36,25 +49,12 @@ DB_HOST=db
 DB_PORT=5432
 ```
 
-Установка зависимостей, выполнение миграций
-
 ```
-pip install -r requirements.txt
-python manage.py migrate
-```
-
-Запуск с настройками development 
-
-```
-python manage.py runserver --settings=project.settings.development
-``````
-
-Запуска с настройками production
-```
-python manage.py runserver --settings=project.settings.production
+python manage.py runserver --settings=project.settings.production --insecure
 ```
 
 ## Docker
+
 ```
 docker compose up --build
 ```

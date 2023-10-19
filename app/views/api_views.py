@@ -9,10 +9,6 @@ from rest_framework import status
 from rest_framework.pagination import PageNumberPagination
 
 from rest_framework.generics import ListAPIView
-from django.core.cache import cache
-
-from django.utils.decorators import method_decorator
-from django.views.decorators.cache import cache_page
 
 User = get_user_model()
 
@@ -27,13 +23,11 @@ class EventListAPIView(ListAPIView):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
 
-    @method_decorator(cache_page(timeout=60))
     def get(self, *args, **kwargs):
         return super().get(*args, **kwargs)
 
 class EventAPIView(APIView):
     # Get only auth user events
-    @method_decorator(cache_page(timeout=60))
     def get(self, request):
         queryset = Event.objects.filter(creator=request.user)
         serializer = EventSerializer(queryset, many=True)
